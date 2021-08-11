@@ -3,22 +3,25 @@
 <head>
   <title>Echiquier naillousain</title>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- Menu de navigation du site -->
+<div class="left">
 <ul class="navbar">
   <li><a href="index.html">Accueil</a>
   <li><a href="contacts.html">Contacts</a>
   <li><a href="carte.html">Nous situer</a>
   <li><a href="liens.html">Liens</a>
 </ul>
-	<style>
-	
-  </style>
+</div>
+
+
 <!-- Contenu principal -->
+<div class="main">
 <h1>Echiquier naillousain</h1>
 <img src=".\images\pieces.png" style="width:auto;">
 <h2>Rendez-vous tous les mardi à 21h ! </h2>
@@ -28,10 +31,45 @@
 <a href="carte.html">
 	<img src="./images/logoMaps.JPG" style="width:4%;">
 </a>
-
+<p> si vous souhaitez donner votre email : </p>
+<form>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email"
+  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></input>
+  <button onclick="saveTextAsFile()">Envoyer</button>
+</form>
 <!-- Signer et dater la page, c'est une question de politesse! -->
-<address>Mise à jour le 21 / 07 / 2021<br>
+<address>Mise à jour le 8 / 08 / 2021<br>
   </address>
+</div>
+
+<script type="text/javascript">
+ 
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("email").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = "maliste";
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+
+</script>
+
 
 </body>
 </html>
